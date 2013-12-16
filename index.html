@@ -20,11 +20,6 @@
                 display: none;
             }
 
-            /* bug pure ? */
-            legend {
-                letter-spacing: 0em;
-            }
-
             #result-preview {
                 width: 100%;
                 height: 600px;
@@ -42,12 +37,14 @@
                             <textarea name="raw-query" id="raw-query" class="pure-input-1" placeholder="Veuillez saisir la requ&ecirc;te &aacute; formater..." required autofocus></textarea>
                         </div>
 
-                        <div class="pure-u-1"><button type="submit" id="format-query" class="pure-button pure-input-1">format</button></div>
+                        <div class="pure-u-1">
+                            <button type="submit" id="format-query" class="pure-button pure-input-1">format</button>
+                        </div>
                     </fieldset>
                 </form>
 
-                <form action="" method="GET" class="pure-form pure-u-1">
-                    <fieldset class="pure-group">
+                <form action="" method="GET" class="pure-form">
+                    <fieldset>
                         <legend>Query editor</legend>
 
                         <div class="pure-g">
@@ -84,13 +81,17 @@
                                 </label>
                             </div>
                         </div>
+                    </fieldset>
 
+                    <fieldset class="pure-group">
                         <div class="pure-u-1">
                             <textarea name="query-editor" id="query-editor" class="pure-input-1" required></textarea>
                             <textarea name="original-query-editor" id="original-query-editor"></textarea>
                         </div>
 
-                        <div class="pure-u-1"><button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button></div>
+                        <div class="pure-u-1">
+                            <button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button>
+                        </div>
                     </fieldset>
                 </form>
             </div>
