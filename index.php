@@ -20,7 +20,7 @@
                 display: none;
             }
 
-            /* bug pure */
+            /* bug pure ? */
             legend {
                 letter-spacing: 0em;
             }
