@@ -35,16 +35,18 @@
     <body>
         <div class="pure-g-r">
             <div class="pure-u-1">
-                <form action="" method="GET" class="pure-form pure-g-r">
+                <form action="" method="GET" class="pure-form pure-u-1">
                     <fieldset class="pure-group">
                         <legend>Solr query formatter</legend>
-                        <div class="pure-u-1"><textarea name="raw-query" id="raw-query" class="pure-input-1" placeholder="Veuillez saisir la requ&ecirc;te &aacute; formater..." required autofocus><?php echo $rawQuery; ?></textarea></div>
+                        <div class="pure-u-1">
+                            <textarea name="raw-query" id="raw-query" class="pure-input-1" placeholder="Veuillez saisir la requ&ecirc;te &aacute; formater..." required autofocus></textarea>
+                        </div>
 
                         <div class="pure-u-1"><button type="submit" id="format-query" class="pure-button pure-input-1">format</button></div>
                     </fieldset>
                 </form>
 
-                <form action="" method="GET" class="pure-form pure-g-r">
+                <form action="" method="GET" class="pure-form pure-u-1">
                     <fieldset class="pure-group">
                         <legend>Query editor</legend>
 
