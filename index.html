@@ -4,7 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Solr tools</title>
 
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+        <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">-->
+        <link rel="stylesheet" href="bower_components/purecss/build/pure-min.css">
         <style>
             body {
                 padding: 0 2em;
@@ -87,16 +88,27 @@
                         </div>
 
                         <div class="pure-u-1">
-                            <button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button>
+                            <div class="pure-u-1">
+                                <button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button>
+                            </div>
+<!--                            <div class="pure-u-1-5">
+                                <button type="submit" id="get-query-debug-info" class="pure-button pure-input-1">debug</button>
+                            </div>-->
                         </div>
                     </fieldset>
                 </form>
+            </div>
+            <div class="pure-u-1">
+                <div id="debug-info">
+
+                </div>
             </div>
         </div>
 
 
 
-        <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+        <!--<script src="http://code.jquery.com/jquery-2.0.3.js"></script>-->
+        <script src="./bower_components/jquery/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 var eol = String.fromCharCode(13);
@@ -132,6 +144,23 @@
                 $('#run-query').parents('form').on('submit', function(e) {
                     e.preventDefault();
 
+                    var userClickedButton = $(e.originalEvent.explicitOriginalTarget);
+                    var buttonRun = $('#run-query');
+                    var buttonDebug = $('#get-query-debug-info');
+
+                    var url = null;
+//                    if (userClickedButton.is(buttonDebug)) {
+//                        url = getQueryUrl(true);
+//                        showQueryDebug(url);
+//                    } else {
+                        url = getQueryUrl(false);
+                        runQuery(url);
+//                    }
+
+
+                });
+
+                function getQueryUrl(forceDebug) {
                     var host = $('#server-host').val();
                     var port = $('#server-port').val();
                     var url = jQuery.trim($('#query-editor').val());
@@ -140,8 +169,9 @@
 
                     url += '&wt=' + format;
 
-                    if (debug) {
+                    if (debug || forceDebug) {
                         url += '&debugQuery=true';
+                        url += '&indent=true';
                     }
 
                     if (0 === url.indexOf('/')) {
@@ -150,11 +180,30 @@
 
                     url = url.replace(/\n/g, '');
 
-                    var tmpUrl = 'http://' + host + ':' + port + '/' + url;
-                    var finalUrl = decodeURI(tmpUrl);
+                    var finalUrl = 'http://' + host + ':' + port + '/' + url;
 
-                    window.open(finalUrl);
-                });
+                    return finalUrl;
+                }
+
+                function runQuery(url) {
+                    window.open(url);
+                }
+
+                function showQueryDebug(queryUrl) {
+                    getDebugInfosQuery(queryUrl);
+                }
+
+                function getDebugInfosQuery(queryUrl) {
+                    $.ajax({
+                        url: queryUrl,
+                        success: function(data) {
+                            var debugInfoNode = $('#debug-info');
+
+                            var explains = data.debug.explain;
+                            console.log(explains);
+                        }
+                    })
+                }
 
                 /**
                  *

@@ -1,0 +1,24 @@
+{
+  "name": "solr-tools",
+  "version": "0.0.0",
+  "authors": [
+    "Armand Abric <armand.abric@virtual-expo.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "purecss": "~0.3.0",
+    "jqtree": "~0.19.0",
+    "backbone": "~1.1.0",
+    "backbone.babysitter": "~0.0.6"
+  }
+}
