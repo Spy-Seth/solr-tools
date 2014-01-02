@@ -6,32 +6,14 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <link rel="shortcut icon" href="images/favicon.ico">
-        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+        <link rel="shortcut icon" href="statics/images/favicon.ico">
+        <link rel="apple-touch-icon" href="statics/images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="statics/images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="statics/images/apple-touch-icon-114x114.png">
 
         <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">-->
         <link rel="stylesheet" href="bower_components/purecss/build/pure-min.css">
-        <style>
-            body {
-                padding: 0 2em;
-            }
-
-            #raw-query {
-                height: 4em;
-                resize: vertical;
-                margin-bottom: 1em;
-            }
-            #query-editor {
-                height: 30em;
-                resize: vertical;
-                margin-bottom: 1em;
-            }
-            #original-query-editor {
-                display: none;
-            }
-        </style>
+        <link rel="stylesheet" href="statics/css/main.css">
     </head>
     <body>
         <div class="pure-g-r">
@@ -102,9 +84,11 @@
                             <div class="pure-u-1">
                                 <button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button>
                             </div>
-<!--                            <div class="pure-u-1-5">
+<!--
+                            <div class="pure-u-1-5">
                                 <button type="submit" id="get-query-debug-info" class="pure-button pure-input-1">debug</button>
-                            </div>-->
+                            </div>
+-->
                         </div>
                     </fieldset>
                 </form>
@@ -120,130 +104,6 @@
 
         <!--<script src="http://code.jquery.com/jquery-2.0.3.js"></script>-->
         <script src="./bower_components/jquery/jquery.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var eol = String.fromCharCode(13);
-
-                $('#format-query').parents('form').on('submit', function(e) {
-                    e.preventDefault();
-
-                    if (true === confirmFormatQuery()) {
-                        var rawQueryNode = $(this).find('#raw-query');
-                        var rawQuery = rawQueryNode.val();
-
-                        var queryResult = '' + rawQuery;
-
-                        queryResult = jQuery.trim(queryResult);
-                        queryResult = decodeURIComponent(queryResult);
-                        queryResult = queryResult.replace(/&version=2/, '');
-                        queryResult = queryResult.replace(/&wt=javabin/, '');
-                        queryResult = queryResult.replace(/\?/, eol + '?');
-                        queryResult = queryResult.replace(/&/g, eol + '&');
-                        queryResult = queryResult.replace(/\\n/g, eol);
-
-                        queryResult = queryResult.replace(/(https?:\/\/(.*):\d{4})/, '');
-
-                        if (0 === queryResult.indexOf('/')) {
-                            queryResult = '/' + queryResult.substr(1, queryResult.length);
-                        }
-
-                        $('#query-editor').val(queryResult);
-                        $('#original-query-editor').val(queryResult);
-                    }
-                });
-
-                $('#run-query').parents('form').on('submit', function(e) {
-                    e.preventDefault();
-
-                    var userClickedButton = $(e.originalEvent.explicitOriginalTarget);
-                    var buttonRun = $('#run-query');
-                    var buttonDebug = $('#get-query-debug-info');
-
-                    var url = null;
-//                    if (userClickedButton.is(buttonDebug)) {
-//                        url = getQueryUrl(true);
-//                        showQueryDebug(url);
-//                    } else {
-                        url = getQueryUrl(false);
-                        runQuery(url);
-//                    }
-
-
-                });
-
-                function getQueryUrl(forceDebug) {
-                    var host = $('#server-host').val();
-                    var port = $('#server-port').val();
-                    var url = jQuery.trim($('#query-editor').val());
-                    var debug = $('#debug-query').prop('checked');
-                    var format = $('#result-format').val();
-
-                    url += '&wt=' + format;
-
-                    if (debug || forceDebug) {
-                        url += '&debugQuery=true';
-                        url += '&indent=true';
-                    }
-
-                    if (0 === url.indexOf('/')) {
-                        url = url.substring(1, url.length);
-                    }
-
-                    url = url.replace(/\n/g, '');
-
-                    var finalUrl = 'http://' + host + ':' + port + '/' + url;
-
-                    return finalUrl;
-                }
-
-                function runQuery(url) {
-                    window.open(url);
-                }
-
-                function showQueryDebug(queryUrl) {
-                    getDebugInfosQuery(queryUrl);
-                }
-
-                function getDebugInfosQuery(queryUrl) {
-                    $.ajax({
-                        url: queryUrl,
-                        success: function(data) {
-                            var debugInfoNode = $('#debug-info');
-
-                            var explains = data.debug.explain;
-                            console.log(explains);
-                        }
-                    })
-                }
-
-                /**
-                 *
-                 * @returns {Boolean}
-                 */
-                function isQueryHasChangeInEditor() {
-                    return ($('#original-query-editor').val() != $('#query-editor').val());
-                }
-
-                /**
-                 *
-                 * @returns {String}
-                 */
-                var confirmLeavePage = function() {
-                    if (isQueryHasChangeInEditor()) {
-                        return 'Vous allez perdre les modifications apportées à la requ&ecirc;te. Continuer ?';
-                    }
-                };
-
-                var confirmFormatQuery = function() {
-                    if (isQueryHasChangeInEditor()) {
-                        return confirm('Vous allez perdre les modifications apportées à la requ&ecirc;te. Continuer ?');
-                    }
-
-                    return true;
-                };
-
-                $(window).on('beforeunload', confirmLeavePage);
-            });
-        </script>
+        <script src="./statics/js/main.js"></script>
     </body>
 </html>

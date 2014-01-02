@@ -1,0 +1,17 @@
+body {
+    padding: 0 2em;
+}
+
+#raw-query {
+    height: 4em;
+    resize: vertical;
+    margin-bottom: 1em;
+}
+#query-editor {
+    height: 30em;
+    resize: vertical;
+    margin-bottom: 1em;
+}
+#original-query-editor {
+    display: none;
+}
