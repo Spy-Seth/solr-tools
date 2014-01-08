@@ -18,8 +18,6 @@
     "jquery": "~2.0.3",
     "purecss": "~0.3.0",
     "jqtree": "~0.19.0",
-    "backbone": "~1.1.0",
-    "backbone.babysitter": "~0.0.6",
-    "backbone.marionette": "~1.4.1"
+    "soma.js": "~2.0.4"
   }
 }
