@@ -11,100 +11,16 @@
         <link rel="apple-touch-icon" sizes="72x72" href="./app/statics/images/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="./app/statics/images/apple-touch-icon-114x114.png">
 
-        <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">-->
         <link rel="stylesheet" href="./app/vendor/purecss/build/pure-min.css">
         <link rel="stylesheet" href="./app/statics/css/main.css">
     </head>
     <body>
-        <div class="pure-g-r">
-            <div class="pure-u-1">
-                <form action="" method="GET" class="pure-form">
-                    <fieldset class="pure-u-1">
-                        <legend>Solr query formatter</legend>
-
-                        <div class="pure-u-1">
-                            <textarea name="raw-query" id="raw-query" class="pure-input-1" placeholder="Veuillez saisir la requ&ecirc;te &aacute; formater." required autofocus></textarea>
-                        </div>
-
-                        <div class="pure-u-1">
-                            <button type="submit" id="format-query" class="pure-button pure-input-1">format</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-
-            <div class="pure-u-1">
-                <form action="" method="GET" class="pure-form">
-                    <fieldset class="pure-u-1">
-                        <legend>Query editor</legend>
-
-                        <div class="pure-u-1">
-                            <div class="pure-u-1-5">
-                                <select id="server-host" class="pure-input-1">
-                                    <option value="velo1solx01.virtual-expo.com">velo1solx01.virtual-expo.com</option>
-                                    <option value="velo1solx02.virtual-expo.com" selected>velo1solx02.virtual-expo.com</option>
-                                    <option value="veso2solx01.virtual-expo.com">veso2solx01.virtual-expo.com</option>
-                                    <option value="veso3solx03.virtual-expo.com">veso3solx03.virtual-expo.com</option>
-                                    <option value="veso3solx04.virtual-expo.com">veso3solx04.virtual-expo.com</option>
-                                </select>
-                            </div>
-
-                            <div class="pure-u-1-8">
-                                <select id="server-port" class="pure-input-1">
-                                    <option value="8080">8080 - AE</option>
-                                    <option value="8081" selected>8081 - NE</option>
-                                    <option value="8082">8082 - DI</option>
-                                    <option value="8083">8083 - ME</option>
-                                </select>
-                            </div>
-
-                            <div class="pure-u-1-8">
-                                <select id="result-format" class="pure-input-1">
-                                    <option value="json" selected>json</option>
-                                    <option value="xml">xml</option>
-                                </select>
-                            </div>
-
-                            <div class="pure-u-1-6">
-                                <label for="debug-query" class="pure-checkbox">
-                                    <input type="checkbox" id="debug-query" checked>
-                                    debug
-                                </label>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="pure-u-1">
-                        <div class="pure-u-1">
-                            <textarea name="query-editor" id="query-editor" class="pure-input-1" placeholder="Veuillez saisir la requ&ecirc;te &aacute; formater, ou utiliser le formateur ci-dessus." required></textarea>
-                            <textarea name="original-query-editor" id="original-query-editor"></textarea>
-                        </div>
-
-                        <div class="pure-u-1">
-                            <div class="pure-u-1">
-                                <button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button>
-                            </div>
-<!--
-                            <div class="pure-u-1-5">
-                                <button type="submit" id="get-query-debug-info" class="pure-button pure-input-1">debug</button>
-                            </div>
--->
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="pure-u-1">
-                <div id="debug-info">
-
-                </div>
-            </div>
-        </div>
+        <div id="application-container"></div>
 
 
 
-        <!--<script src="http://code.jquery.com/jquery-2.0.3.js"></script>-->
         <script src="./app/vendor/jquery/jquery.js"></script>
         <script src="./app/vendor/soma.js/build/soma.js"></script>
-        <script src="./app/statics/js/main.js"></script>
+        <script src="./app/statics/js/application.js"></script>
     </body>
 </html>
