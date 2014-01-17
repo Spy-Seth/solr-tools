@@ -13,7 +13,7 @@ $(document).ready(function() {
             queryResult = jQuery.trim(queryResult);
             queryResult = decodeURIComponent(queryResult);
             queryResult = queryResult.replace(/&version=2/, '');
-            queryResult = queryResult.replace(/&wt=javabin/, '');
+            queryResult = queryResult.replace(/&wt=\w*/, '');
             queryResult = queryResult.replace(/\?/, eol + '?');
             queryResult = queryResult.replace(/&/g, eol + '&');
             queryResult = queryResult.replace(/\\n/g, eol);

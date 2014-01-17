@@ -1,0 +1,58 @@
+<form action="" method="GET" class="pure-form">
+    <fieldset class="pure-u-1">
+        <legend>Query editor</legend>
+
+        <div class="pure-u-1">
+            <div class="pure-u-1-5">
+                <select id="server-host" class="pure-input-1">
+                    <option value="velo1solx01.virtual-expo.com">velo1solx01.virtual-expo.com</option>
+                    <option value="velo1solx02.virtual-expo.com" selected>velo1solx02.virtual-expo.com</option>
+                    <option value="veso2solx01.virtual-expo.com">veso2solx01.virtual-expo.com</option>
+                    <option value="veso3solx03.virtual-expo.com">veso3solx03.virtual-expo.com</option>
+                    <option value="veso3solx04.virtual-expo.com">veso3solx04.virtual-expo.com</option>
+                </select>
+            </div>
+
+            <div class="pure-u-1-8">
+                <select id="server-port" class="pure-input-1">
+                    <option value="8080">8080 - AE</option>
+                    <option value="8081" selected>8081 - NE</option>
+                    <option value="8082">8082 - DI</option>
+                    <option value="8083">8083 - ME</option>
+                </select>
+            </div>
+
+            <div class="pure-u-1-8">
+                <select id="result-format" class="pure-input-1">
+                    <option value="json" selected>json</option>
+                    <option value="xml">xml</option>
+                </select>
+            </div>
+
+            <div class="pure-u-1-6">
+                <label for="debug-query" class="pure-checkbox">
+                    <input type="checkbox" id="debug-query" checked>
+                    debug
+                </label>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="pure-u-1">
+        <div class="pure-u-1">
+            <textarea name="query-editor" id="query-editor" class="pure-input-1" placeholder="Veuillez saisir la requ&ecirc;te &aacute; formater, ou utiliser le formateur ci-dessus." required></textarea>
+            <textarea name="original-query-editor" id="original-query-editor"></textarea>
+        </div>
+
+        <div class="pure-u-1">
+            <div class="pure-u-1">
+                <button type="submit" id="run-query" class="pure-button pure-input-1 pure-button-primary">run</button>
+            </div>
+            <!--
+                                        <div class="pure-u-1-5">
+                                            <button type="submit" id="get-query-debug-info" class="pure-button pure-input-1">debug</button>
+                                        </div>
+            -->
+        </div>
+    </fieldset>
+</form>
