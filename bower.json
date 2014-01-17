@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "jquery": "~2.0.3",
-    "purecss": "~0.3.0",
-    "soma.js": "~2.0.4"
+    "purecss": "~0.3.0"
   }
 }
