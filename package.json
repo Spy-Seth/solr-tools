@@ -1,0 +1,30 @@
+{
+  "name": "solr-tools",
+  "version": "0.0.0",
+  "description": "Solr query runner",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Spy-Seth/solr-tools.git"
+  },
+  "author": "Armand Abric",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Spy-Seth/solr-tools/issues"
+  },
+  "homepage": "https://github.com/Spy-Seth/solr-tools",
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-handlebars": "latest",
+    "grunt-contrib-jasmine": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-sass": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest"
+  }
+}
