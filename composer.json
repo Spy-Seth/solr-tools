@@ -1,0 +1,12 @@
+{
+    "name": "forgebinaire/solr-tools",
+    "authors": [
+        {
+            "name": "Armand Abric",
+            "email": "contact@forgebinaire.net"
+        }
+    ],
+    "require": {
+        "guzzle/http": "~3.8"
+    }
+}
