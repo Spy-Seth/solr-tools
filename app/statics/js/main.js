@@ -1,7 +1,11 @@
 $(document).ready(function() {
     var eol = String.fromCharCode(13);
 
-    $('#format-query').parents('form').on('submit', function(e) {
+    var buttonFormatQuery = $('#format-query');
+    var buttonRun = $('#run-query');
+    var buttonDebug = $('#show-debug-result');
+
+    buttonFormatQuery.parents('form').on('submit', function(e) {
         e.preventDefault();
 
         if (true === confirmFormatQuery()) {
@@ -29,23 +33,20 @@ $(document).ready(function() {
         }
     });
 
-    $('#run-query').parents('form').on('submit', function(e) {
+    buttonRun.parents('form').on('submit', function(e) {
         e.preventDefault();
 
         var userClickedButton = $(e.originalEvent.explicitOriginalTarget);
-        var buttonRun = $('#run-query');
-        var buttonDebug = $('#get-query-debug-info');
 
         var url = null;
-//                    if (userClickedButton.is(buttonDebug)) {
-//                        url = getQueryUrl(true);
-//                        showQueryDebug(url);
-//                    } else {
         url = getQueryUrl(false);
         runQuery(url);
-//                    }
+    });
 
-
+    buttonDebug.on('click', function(e) {
+        e.preventDefault();
+        url = getQueryUrl(true);
+        showQueryDebug(url);
     });
 
     function getQueryUrl(forceDebug) {
@@ -78,17 +79,74 @@ $(document).ready(function() {
     }
 
     function showQueryDebug(queryUrl) {
-        getDebugInfosQuery(queryUrl);
+        getDebugInfosQuery(queryUrl, function(explains) {
+            var debugResultNode = $('#debug-result');
+            var debugRowIdPrefix = 'debug-row-';
+
+            // Clean old content
+            debugResultNode.children().remove();
+
+            // Index
+            var indexContainerNode = $('<div></div>');
+            indexContainerNode.addClass('pure-menu');
+            indexContainerNode.addClass('pure-menu-open');
+            var listIndexNode = $('<ol></ol>');
+            jQuery.each(explains, function(key) {
+                var listIndexItemNode = $('<li></li>');
+                var listIndexLinkNode = $('<a></a>');
+                listIndexLinkNode.attr('href', '#' + debugRowIdPrefix + key);
+                listIndexLinkNode.text(key);
+
+                listIndexItemNode.append(listIndexLinkNode);
+                listIndexNode.append(listIndexItemNode);
+            });
+            indexContainerNode.append(listIndexNode);
+            debugResultNode.append(indexContainerNode);
+
+            $(document).scrollspy({
+                min: indexContainerNode.offset().top - parseInt(indexContainerNode.css("margin-top").replace("px", "")),
+                max: Number.MAX_VALUE,
+                onEnter: function(element, position) {
+                    indexContainerNode.toggleClass('sticky', true);
+                },
+                onLeave: function(element, position) {
+                    indexContainerNode.toggleClass('sticky', false);
+                }
+            });
+
+
+            // Debug content
+            jQuery.each(explains, function(key) {
+                var oneRowTitleNode = $('<h3>&nbsp;</h3>');
+                oneRowTitleNode.attr('id', debugRowIdPrefix + key);
+                oneRowTitleNode.text(key);
+
+                var oneRowDebugNode = $('<pre>&nbsp;<pre>');
+                oneRowDebugNode.addClass('pure-u-1');
+                var oneRowdebugContent = jQuery.trim(this);
+                oneRowdebugContent = oneRowdebugContent.toString().replace(/^(\s*)(\S*)(\s)/gm, '$1<span class="score">$2</span>$3');
+                oneRowdebugContent = oneRowdebugContent.toString().replace(/(\w+):(\w+)/gm, '<span class="fieldName">$1</span>:<span class="fieldValue">$2</span>');
+                oneRowdebugContent = oneRowdebugContent.toString().replace(/field=(\w+),/gm, 'field=<span class="fieldName">$1</span>,');
+                oneRowDebugNode.html(oneRowdebugContent);
+
+                debugResultNode.append(oneRowTitleNode);
+                debugResultNode.append(oneRowDebugNode);
+            });
+        });
     }
 
-    function getDebugInfosQuery(queryUrl) {
+    function getDebugInfosQuery(queryUrl, callback) {
+        console.info(queryUrl);
         $.ajax({
-            url: queryUrl,
+            url: 'proxy.php',
+            data: {
+                url: queryUrl
+            },
             success: function(data) {
-                var debugInfoNode = $('#debug-info');
+                var debug = data.debug;
+                var explains = debug.explain || {};
 
-                var explains = data.debug.explain;
-                console.log(explains);
+                callback.call(this, explains);
             }
         })
     }

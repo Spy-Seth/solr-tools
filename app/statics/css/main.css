@@ -3,15 +3,61 @@ body {
 }
 
 #raw-query {
-    height: 4em;
+    height: 5em;
     resize: vertical;
     margin-bottom: 1em;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.4em;
 }
 #query-editor {
     height: 30em;
     resize: vertical;
     margin-bottom: 1em;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.4em;
 }
 #original-query-editor {
     display: none;
+}
+
+
+#debug-result {
+    counter-reset: h3;
+}
+#debug-result h3:before {
+    content: counter(h3) ".  ";
+    counter-increment: h3;
+}
+#debug-result h3 {
+    margin-bottom: 0;
+}
+
+#debug-result pre {
+    font-size: 0.9em;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 0.5em;
+}
+#debug-result pre .score {
+    color: darkred;
+}
+
+#debug-result pre .fieldName {
+    color: darkorchid;
+}
+#debug-result pre .fieldValue {
+    color: darkmagenta;
+    font-weight: bold;
+}
+
+#debug-result .pure-menu {
+    width: 200px;
+    position: absolute;
+    right: 0;
+    margin: 2em;
+}
+#debug-result .pure-menu.sticky {
+    top: 0;
+    position: fixed;
 }

@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "jquery": "~2.0.3",
+    "jquery-scrollspy": "latest",
     "purecss": "~0.3.0"
   }
 }
