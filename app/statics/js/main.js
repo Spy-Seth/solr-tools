@@ -125,7 +125,8 @@ $(document).ready(function() {
                 oneRowDebugNode.addClass('pure-u-1');
                 var oneRowdebugContent = jQuery.trim(this);
                 oneRowdebugContent = oneRowdebugContent.toString().replace(/^(\s*)(\S*)(\s)/gm, '$1<span class="score">$2</span>$3');
-                oneRowdebugContent = oneRowdebugContent.toString().replace(/(\w+):(\w+)/gm, '<span class="fieldName">$1</span>:<span class="fieldValue">$2</span>');
+                oneRowdebugContent = oneRowdebugContent.toString().replace(/(\w+):("+)([\w\s]+)("+)/gm, '<span class="fieldName">$1</span>:$2<span class="fieldValue">$3</span>$4');
+                oneRowdebugContent = oneRowdebugContent.toString().replace(/\((\w+):/gm, '(<span class="fieldName">$1</span>:');
                 oneRowdebugContent = oneRowdebugContent.toString().replace(/field=(\w+),/gm, 'field=<span class="fieldName">$1</span>,');
                 oneRowDebugNode.html(oneRowdebugContent);
 
