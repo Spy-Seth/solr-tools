@@ -39,6 +39,25 @@ body {
     font-family: 'Courier New', Courier, monospace;
     margin-top: 0.5em;
 }
+#debug-result pre:before {
+    counter-reset: linecounter;
+}
+#debug-result pre .line {
+    cursor: default;
+    counter-increment: linecounter;
+    width: 100%;
+}
+#debug-result pre .line:before {
+    content: counter(linecounter);
+    width: 2em;
+    display: inline-block;
+    border-right: 1px solid black;
+    margin-right: 0.5em;
+}
+#debug-result pre .line:hover {
+    background-color: lightgray;
+}
+
 #debug-result pre .score {
     color: darkred;
 }
